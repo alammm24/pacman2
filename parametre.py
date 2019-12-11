@@ -1,0 +1,13 @@
+from pygame.math import Vector2 as vec
+#parametre de l'ecran
+HEIGHT , WIDTH=  560, 620
+GREY = (107,107,107)
+BLACK=(0,0,0)
+RED = (208, 22, 22)
+START_TEXT_SIZE = 16
+START_FONT = 'arial black'
+FPS = 60
+TOP_BOTTOM_BUFFER = 50
+MAZE_WIDTH, MAZE_HEIGHT = WIDTH-TOP_BOTTOM_BUFFER, HEIGHT-TOP_BOTTOM_BUFFER
+ROWS = 30
+COLS = 28
