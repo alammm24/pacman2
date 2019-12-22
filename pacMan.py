@@ -1,4 +1,4 @@
-
+import pygame
 from event import *
 from fonction_annexe import *
 from time import sleep
@@ -8,9 +8,10 @@ from random import randint
 
 pacMan = initialise_pacMan()
 
-fantomes = initialise_fantomes()
+fantomes = []
+initialise_fantomes(fantomes)   
             
-cerise = { "x":10 , "y":10 , "image" : './image/pacman_droite.png' }
+# cerise = { "x":10 , "y":10 , "image" : './image/pacman_droite.png' }
 
 
 points = []#initialise_point()
@@ -18,7 +19,7 @@ superPoints = []#initialise_superPoint()
 cerises = []#initialise_cerise()
 murs = [] #initialise_murs()
             
-terrain = { "TAILLE_LARGEUR" : 600 , "TAILLE_LARGEUR" : 600, "TAILLE_CASE_HAUTEUR":30, "TAILLE_CASE_LARGEUR":40 ,"murs":murs}
+terrain = { "TAILLE_LARGEUR" : 560 , "TAILLE_LARGEUR" : 620, "TAILLE_CASE_HAUTEUR":30, "TAILLE_CASE_LARGEUR":30 ,"murs":murs}
 
 
 initialiseJeu(pacMan,fantomes,points,superPoints,cerises)
@@ -32,8 +33,6 @@ while gameOver(pacMan):
     afficheJeu(terrain,pacMan,fantomes,points,superPoints,cerises)
     mise_a_jour()
     
-            
-    
     # gestion des événements
     evenement = donne_ev()
     type = type_ev(evenement)
@@ -42,15 +41,10 @@ while gameOver(pacMan):
         break
         
     elif type == 'Touche':
-        
-        pacMan["direction"] = change_direction(pacMan, touche(evenement)) # direction
-        for i in range(0,len(fantomes)):
-            for j in range(0,len(murs)):
-                if collision_pacMan_fantome(pacMan, fantome) :
-                    fantomes[i]["direction"] =  change_direction_fantome(fantomes[i])# direction
-    
+        change_direction_pac_man(pacMan, touche(evenement)) # direction
+       
     #deplacement
-    deplace_personnage(pacMan,fantomes)
+    deplace_personnages(pacMan,fantomes,murs)
     teleportation(pacMan,terrain["TAILLE_LARGEUR" ],terrain["TAILLE_LARGEUR"])
     collision(pacMan,fantomes,points,superPoints,cerises)
     
